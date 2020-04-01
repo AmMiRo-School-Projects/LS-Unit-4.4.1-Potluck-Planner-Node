@@ -26,6 +26,19 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+router.get("/:id/users", async (req, res) => {
+  try {
+    const users = await Potlucks.findUsersByPotluck(req.params.id);
+    res.status(200).json(users);
+  } catch (err) {
+    console.log("potlucks get users by potluck error", err);
+    res.status(500).json({
+      message: "there was an error getting users for this potluck",
+      error: err
+    });
+  }
+});
+
 router.post("/", async (req, res) => {
   try {
     const potluckInfo = {

@@ -30,7 +30,7 @@ router.get("/:id", async (req, res) => {
 
 router.get("/:id/potlucks", async (req, res) => {
   try {
-    const potlucks = await Users.findUserPotlucks(req.params.id);
+    const potlucks = await Users.findPotlucksbyUser(req.params.id);
     res.status(200).json(potlucks);
   } catch (err) {
     console.log("users get potlucks error", err);

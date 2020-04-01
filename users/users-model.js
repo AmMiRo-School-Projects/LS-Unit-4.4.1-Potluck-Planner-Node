@@ -4,7 +4,7 @@ module.exports = {
   findUsers,
   findUserBy,
   findUserById,
-  findUserPotlucks,
+  findPotlucksbyUser,
   insertUser,
   updateUser,
   removeUser
@@ -27,8 +27,20 @@ function findUserById(id) {
     .first();
 }
 
-function findUserPotlucks(user_id) {
-  return db("potlucks").where({ user_id });
+function findPotlucksbyUser(user_id) {
+  return db
+    .select(
+      "potlucks.id",
+      "potlucks.name",
+      "potlucks.location",
+      "potlucks.date",
+      "potlucks.time",
+      "potlucks.description",
+      "potluck_users.attending"
+    )
+    .from("potlucks")
+    .join("potluck_users", "potlucks.id", "=", "potluck_users.potluck_id")
+    .where("potluck_users.user_id", "=", user_id);
 }
 
 async function insertUser(user) {
