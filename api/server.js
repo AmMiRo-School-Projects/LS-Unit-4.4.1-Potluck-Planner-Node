@@ -6,6 +6,7 @@ const usersRouter = require("../users/usersRouter.js");
 const authRouter = require("../users/authRouter.js");
 const potlucksRouter = require("../potlucks/potlucksRouter.js");
 const attendeesRouter = require("../attendees/attendeesRouter");
+const contributionsRouter = require("../contributions/contributionsRouter");
 
 // assign server
 const server = express();
@@ -17,6 +18,7 @@ server.use("/api/users", usersRouter);
 server.use("/api/auth", authRouter);
 server.use("/api/potlucks", potlucksRouter);
 server.use("/api/attendees", attendeesRouter);
+server.use("/api/contributions", contributionsRouter);
 
 server.get("/", (req, res) => {
   res.status(200).json({ message: "API is running" });
