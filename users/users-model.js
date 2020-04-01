@@ -4,6 +4,7 @@ module.exports = {
   findUsers,
   findUserBy,
   findUserById,
+  findUserPotlucks,
   insertUser,
   updateUser,
   removeUser
@@ -24,6 +25,10 @@ function findUserById(id) {
     .select("id", "username", "email")
     .where({ id })
     .first();
+}
+
+function findUserPotlucks(user_id) {
+  return db("potlucks").where({ user_id });
 }
 
 async function insertUser(user) {

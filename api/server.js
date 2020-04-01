@@ -2,8 +2,10 @@
 const express = require("express");
 
 // assign routers
-const usersRouter = require("../users/usersRouter");
-const authRouter = require("../users/authRouter");
+const usersRouter = require("../users/usersRouter.js");
+const authRouter = require("../users/authRouter.js");
+const potlucksRouter = require("../potlucks/potlucksRouter.js");
+const attendeesRouter = require("../attendees/attendeesRouter");
 
 // assign server
 const server = express();
@@ -13,6 +15,8 @@ server.use(express.json());
 // use Routers
 server.use("/api/users", usersRouter);
 server.use("/api/auth", authRouter);
+server.use("/api/potlucks", potlucksRouter);
+server.use("/api/attendees", attendeesRouter);
 
 server.get("/", (req, res) => {
   res.status(200).json({ message: "API is running" });
