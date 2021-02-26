@@ -4,6 +4,7 @@ module.exports = {
   findPotlucks,
   findPotluckById,
   findUsersByPotluck,
+  findPotluckContributions,
   insertPotluck,
   updatePotluck,
   removePotluck
@@ -25,6 +26,24 @@ function findUsersByPotluck(potluck_id) {
     .from("potluck_users")
     .join("users", "potluck_users.user_id", "=", "users.id")
     .where("potluck_users.potluck_id", "=", potluck_id);
+}
+
+function findPotluckContributions(potluck_id) {
+  return db
+    .select(
+      "potluck_contributions.potluck_id",
+      "potluck_contributions.user_id",
+      "contributions.id",
+      "contributions.name"
+    )
+    .from("potluck_contributions")
+    .join(
+      "contributions",
+      "contributions.id",
+      "=",
+      "potluck_contributions.contribution_id"
+    )
+    .where("potluck_contributions.potluck_id", "=", potluck_id);
 }
 
 async function insertPotluck(potluck) {

@@ -39,6 +39,21 @@ router.get("/:id/users", async (req, res) => {
   }
 });
 
+router.get("/:id/contributions", async (req, res) => {
+  try {
+    const contributions = await Contributions.findPotluckContributions(
+      req.params.id
+    );
+    res.status(200).json(contributions);
+  } catch (err) {
+    console.log("potluck contributions get error", err);
+    res.status(500).json({
+      message: "there was an error getting the contributions for this potluck",
+      error: err
+    });
+  }
+});
+
 router.post("/", async (req, res) => {
   try {
     const potluckInfo = {

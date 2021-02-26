@@ -1,17 +1,18 @@
 const db = require("../database/db-config.js");
 
 module.exports = {
-    findContribution,
+    findContributions,
     findContributionBy,
+    findPotluckContributions,
     insertContribution
 };
 
-function findContribution() {
+function findContributions() {
     return db("contributions");
 };
 
 function findContributionBy(filter) {
-    return db("contributions").where({filter});
+    return db("contributions").where(filter).first();
 };
 
 function insertContribution(contribution) {
